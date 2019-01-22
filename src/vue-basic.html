@@ -6,20 +6,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
-    <style resource="./vue-basic-style.css" />
+    <link href="./vue-basic-style.css" rel="stylesheet"/>
 
 <body>
-<div id="app">
+<div id="app" class="container">
     {{ message }}
 </div>
-<div id="app-2">
+<div id="app-2" class="container">
   <span v-bind:title="message">
     Hover your mouse over me for a few seconds
     to see my dynamically bound title!
   </span>
 </div>
 
-<div id="app-4">
+<div id="app-4" class="container">
     <ol>
         <li v-for="todo in todos">
             {{todo.text}}
@@ -27,6 +27,15 @@
     </ol>
 </div>
 
+<div id="app-5">
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">Reverse Message</button>
+</div>
+
+<div id="app-6" class="container">
+    <p>{{title}}: <a v-html="style"></a> {{ message }}</p>
+    <input v-model="message">
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
@@ -52,6 +61,26 @@
                                    {text: 'Learn Vue'},
                                    {text: 'Build something awesome'}
                                ]
+                           }
+                       })
+
+    var app5 = new Vue({
+                           el: '#app-5',
+                           data: {
+                               message: 'Hello Vue.js!'
+                           },
+                           methods: {
+                               reverseMessage: function () {
+                                   this.message = this.message.split('').reverse().join('')
+                               }
+                           }
+                       })
+    var app6 = new Vue({
+                           el: '#app-6',
+                           data: {
+                               title: "Title",
+                               message: 'Hello Vue!',
+                               style: '</br>'    // -- show how to break it.
                            }
                        })
 </script>
